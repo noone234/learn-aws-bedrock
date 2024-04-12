@@ -9,7 +9,16 @@ kwargs = {
     "modelId": "amazon.titan-text-lite-v1",
     "contentType": "application/json",
     "accept": "*/*",
-    "body": json.dumps({"inputText": prompt}),
+    "body": json.dumps(
+        {
+            "inputText": prompt,
+            "textGenerationConfig": {
+                "maxTokenCount": 500,
+                "temperature": 0.7,
+                "topP": 0.9,
+            },
+        }
+    ),
 }
 
 response = bedrock_client.invoke_model(**kwargs)
