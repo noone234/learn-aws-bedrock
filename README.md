@@ -5,6 +5,12 @@ I'm learning AWS Bedrock, and writing code along the way.
 This project uses AWS's Cloud Development Kit (CDK).
 CDK provided all of the following lovely documentation.
 
+# First project: ShAIver
+
+Given an audio recording of a conversation,
+transcribe and summarize that conversation.
+That is the goal of this project.
+
 # Welcome to your CDK Python project!
 
 This is a blank project for CDK development with Python.
