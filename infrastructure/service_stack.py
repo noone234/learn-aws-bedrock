@@ -18,7 +18,7 @@ class ServiceStack(Stack):
 
         bucket = s3.Bucket(
             self,
-            "Shaiver",
+            "Schaiver",
             auto_delete_objects=True,
             removal_policy=RemovalPolicy.DESTROY,
         )
