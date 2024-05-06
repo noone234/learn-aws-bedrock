@@ -11,6 +11,26 @@ Given an audio recording of a conversation,
 transcribe and summarize that conversation.
 That is the goal of this project.
 
+# Supported audio formats
+
+This project accepts a variety of audio formats as input.
+
+Recommended formats:
+
+- FLAC
+- WAV with PCM 16-bit encoding
+
+Supported formats:
+
+- AMR
+- FLAC
+- M4A
+- MP3
+- MP4
+- Ogg
+- WebM
+- WAV
+
 # Welcome to your CDK Python project!
 
 This is a blank project for CDK development with Python.
