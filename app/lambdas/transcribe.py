@@ -13,10 +13,6 @@ def lambda_handler(event, context):
     key = event["Records"][0]["s3"]["object"]["key"]
 
     # One of a few different checks to ensure we don't end up in a recursive loop.
-    if key != "dialog.mp3":
-        print("This demo only works with dialog.mp3.")
-        return
-
     try:
 
         job_name = "transcription-job-" + str(uuid.uuid4())  # Needs to be a unique name
