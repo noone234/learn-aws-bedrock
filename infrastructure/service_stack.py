@@ -2,6 +2,7 @@ from aws_cdk import (
     # Duration,
     RemovalPolicy,
     Stack,
+    aws_iam as iam,
     aws_lambda,
     aws_lambda_event_sources as lambda_event_sources,
     aws_sqs as sqs,
@@ -36,6 +37,12 @@ class ServiceStack(Stack):
                 "S3_TRANSCRIPT_PATH": "transcript/",
             },
         )
+        transcription_policy = iam.PolicyStatement(
+            actions=["transcribe:StartTranscriptionJob"],
+            resources=["*"],
+            effect=iam.Effect.ALLOW,
+        )
+        lambdaTranscriber.add_to_role_policy(transcription_policy)
 
         lambdaSummarizer = PythonFunction(
             self,
