@@ -2,12 +2,11 @@ import boto3
 import json
 import logging
 
-bedrock_client = boto3.client("bedrock", region_name="us-east-1")
+bedrock_client = boto3.client("bedrock")
 s3_client = boto3.client("s3")
 
 
 def lambda_handler(event, context):
-
     bucket = event["Records"][0]["s3"]["bucket"]["name"]
     key = event["Records"][0]["s3"]["object"]["key"]
 
@@ -16,38 +15,28 @@ def lambda_handler(event, context):
         logging.warning("This demo only works with *-transcript.json.")
         return
 
-    try:
-        file_content = ""
+    file_content = ""
+    response = s3_client.get_object(Bucket=bucket, Key=key)
+    file_content = response["Body"].read().decode("utf-8")
 
-        response = s3_client.get_object(Bucket=bucket, Key=key)
+    transcript = extract_transcript_from_textract(file_content)
 
-        file_content = response["Body"].read().decode("utf-8")
+    logging.info(f"Successfully read file {key} from bucket {bucket}.")
+    logging.info(f"Transcript: {transcript}")
 
-        transcript = extract_transcript_from_textract(file_content)
+    summary = bedrock_summarisation(transcript)
 
-        logging.info(f"Successfully read file {key} from bucket {bucket}.")
-        logging.info(f"Transcript: {transcript}")
+    output_key = key.replace("-transcript.json", "-summary.txt")
+    s3_client.put_object(
+        Bucket=bucket, Key="results.txt", Body=summary, ContentType="text/plain"
+    )
 
-        summary = bedrock_summarisation(transcript)
-
-        s3_client.put_object(
-            Bucket=bucket, Key="results.txt", Body=summary, ContentType="text/plain"
-        )
-
-    except Exception as e:
-        logging.exception(f"Error occurred")
-        return {"statusCode": 500, "body": json.dumps(f"Error occurred: {e}")}
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps(
-            f"Successfully summarized {key} from bucket {bucket}. Summary: {summary}"
-        ),
-    }
+    logging.info(
+        f"Successfully summarized {key} from bucket {bucket}. Summary: {output_key}"
+    ),
 
 
 def extract_transcript_from_textract(file_content):
-
     transcript_json = json.loads(file_content)
 
     output_text = ""
@@ -75,7 +64,6 @@ def extract_transcript_from_textract(file_content):
 
 
 def bedrock_summarisation(transcript):
-
     with open("prompt_template.txt", "r") as file:
         template_string = file.read()
 

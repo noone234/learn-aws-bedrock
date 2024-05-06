@@ -25,7 +25,7 @@ def lambda_handler(event, context):
         MediaFormat=audio_format,
         LanguageCode="en-US",
         OutputBucketName=os.environ["S3_BUCKET_NAME"],
-        OutputKey=f"{os.environ["S3_TRANSCRIPT_PATH"]}{job_name}-transcript.json",
+        OutputKey=f"{os.environ['S3_TRANSCRIPT_PATH']}{job_name}-transcript.json",
         Settings={"ShowSpeakerLabels": True, "MaxSpeakerLabels": 2},
     )
 
