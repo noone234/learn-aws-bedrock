@@ -2,7 +2,7 @@ import boto3
 import json
 import logging
 
-bedrock_client = boto3.client("bedrock")
+bedrock_client = boto3.client("bedrock-runtime")
 s3_client = boto3.client("s3")
 
 
@@ -63,15 +63,15 @@ def extract_transcript_from_textract(file_content):
     return output_text
 
 
-def bedrock_summarisation(transcript):
-    with open("prompt_template.txt", "r") as file:
-        template_string = file.read()
+def bedrock_summarisation(transcript_text: str):
+    prompt = f"""The text between the <transcript> XML tags is a transcript of a conversation. 
+    Write a short summary of the conversation.
 
-    data = {"transcript": transcript, "topics": ["charges", "location", "availability"]}
+    <transcript>
+    {transcript_text}
+    </transcript>
 
-    template = Template(template_string)
-    prompt = template.render(data)
-
+    Here is a summary of the conversation in the transcript:"""
     print(prompt)
 
     kwargs = {
