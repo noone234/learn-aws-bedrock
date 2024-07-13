@@ -1,5 +1,5 @@
 from aws_cdk import (
-    # Duration,
+    Duration,
     RemovalPolicy,
     Stack,
     aws_iam as iam,
@@ -56,6 +56,7 @@ class ServiceStack(Stack):
                 "S3_TRANSCRIPT_PATH": "transcript/",
                 "S3_SUMMARY_PATH": "summary/",
             },
+            timeout=Duration.seconds(30),
         )
         summarization_policy = iam.PolicyStatement(
             actions=["bedrock:InvokeModel"],
