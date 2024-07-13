@@ -31,6 +31,52 @@ Supported formats:
 - WebM
 - WAV
 
+# Requirements
+
+- Python 3.12
+- AWS CLI
+- CDK
+- AWS account that you can deploy this project to. You or your company should own this AWS account.
+
+# Usage
+
+## Setup
+
+1. Create a local clone of this GitHub repo.
+2. Create a Python virtual environment that uses Python 3.12.
+3. Activate the Python virtual environment.
+4. Install requirements.
+
+Here are sample commands.
+
+```
+python -m venv env
+. env/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+```
+
+## Installation
+
+Assuming that you have valid AWS credentials, run:
+
+`cdk deploy`
+
+## Testing
+
+Log into AWS Management Console.
+Enter the AWS account that you just deployed this project to.
+
+In the S3 bucket that this service created, upload a recording of a
+conversation to the audio folder.  Confirm that the file uses a
+supported audio format.
+
+This should result in:
+
+- a full transcript in the S3 bucket's transcripts folder
+- a text summary
+
 # Welcome to your CDK Python project!
 
 This is a blank project for CDK development with Python.
