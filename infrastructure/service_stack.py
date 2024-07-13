@@ -12,14 +12,14 @@ from aws_cdk.aws_lambda_python_alpha import PythonFunction
 from constructs import Construct
 
 
-class ServiceStack(Stack):
+class SchaiverStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         bucket = s3.Bucket(
             self,
-            "Schaiver",
+            "Bucket",
             auto_delete_objects=True,
             removal_policy=RemovalPolicy.DESTROY,
         )
