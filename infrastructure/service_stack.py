@@ -57,6 +57,14 @@ class ServiceStack(Stack):
                 "S3_SUMMARY_PATH": "summary/",
             },
         )
+        summarization_policy = iam.PolicyStatement(
+            actions=["bedrock:InvokeModel"],
+            resources=[
+                "arn:aws:bedrock:*::foundation-model/amazon.titan-text-express-v1"
+            ],
+            effect=iam.Effect.ALLOW,
+        )
+        lambdaSummarizer.add_to_role_policy(summarization_policy)
 
         # Trigger a Lambda function when an audio file is uploaded to an S3 bucket.
         s3PutEventSource = lambda_event_sources.S3EventSource(
