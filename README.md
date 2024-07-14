@@ -69,13 +69,13 @@ Log into AWS Management Console.
 Enter the AWS account that you just deployed this project to.
 
 In the S3 bucket that this service created, upload a recording of a
-conversation to the audio folder.  Confirm that the file uses a
+conversation to the `audio` folder.  Confirm that the file uses a
 supported audio format.
 
-This should result in:
+This should result in a:
 
-- a full transcript in the S3 bucket's transcripts folder
-- a text summary
+- full `transcript`, in the S3 bucket's `transcripts` folder
+- text summary, in a file named `results.txt`
 
 # Welcome to your CDK Python project!
 
