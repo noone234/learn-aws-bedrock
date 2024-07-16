@@ -1,9 +1,9 @@
-# learn-aws-bedrock
+# sumaud
 
 I'm learning AWS Bedrock, and writing code along the way.
 
 This project uses AWS's Cloud Development Kit (CDK).
-CDK provided all of the following lovely documentation.
+CDK provided much of the following documentation.
 
 # First project: SumAud
 
@@ -35,7 +35,7 @@ Supported formats:
 
 - Python 3.12
 - AWS CLI
-- CDK
+- AWS Cloud Development Kit (CDK)
 - AWS account that you can deploy this project to. You or your company should own this AWS account.
 
 # Usage
@@ -76,6 +76,20 @@ This should result in a:
 
 - full `transcript`, in the S3 bucket's `transcripts` folder
 - text summary, in a file named `results.txt`
+
+## Notes
+
+This is a Proof of Concept (POC).
+
+It is also a working example.
+
+When I started my learning journey,
+I was presented with notebooks that contained partial, outdated source code.
+Copying and pasting that code to try it out resulted in errors. Nothing worked.
+Building a complete functional project helped me learn.
+
+This can be done with AWS Step Functions instead of Lambda functions. I hestitated to go that far in a first project.  It would be teaching one more AWS technology.  It is already
+a stretch for software engineers to learn the technologies involved so far.  Adding 1 more, especially for engineers who have not yet embraced Step Functions, would be too much of a learning curve.
 
 # Welcome to your CDK Python project!
 
